@@ -1,10 +1,12 @@
 package com.example.pluralsight_notekeeper_android.database.dao;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.pluralsight_notekeeper_android.database.models.CourseInfo;
 import com.example.pluralsight_notekeeper_android.database.models.ModuleInfo;
 import com.example.pluralsight_notekeeper_android.database.models.NoteInfo;
+import com.example.pluralsight_notekeeper_android.database.utilities.CourseInfoEntry;
 import com.example.pluralsight_notekeeper_android.database.utilities.NoteInfoEntry;
 
 import java.util.ArrayList;
@@ -19,8 +21,8 @@ public class DataManager {
     public static DataManager getInstance() {
         if(ourInstance == null) {
             ourInstance = new DataManager();
-//            ourInstance.initializeCourses();
-//            ourInstance.initializeExampleNotes();
+           ourInstance.initializeCourses();
+           ourInstance.initializeExampleNotes();
         }
         return ourInstance;
     }

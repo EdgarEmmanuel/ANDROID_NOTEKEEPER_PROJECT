@@ -6,5 +6,6 @@ public class NoteInfoEntry {
     public static String COLUMN_NOTE_TEXT="";
     public static String COLUMN_COURSE_ID="";
     public static String _ID="";
+    public static String TABLE_NAME="";
 
 }
