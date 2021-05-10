@@ -3,7 +3,7 @@ package com.example.pluralsight_notekeeper_android.database.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public final class Note implements Parcelable {
+public final class Note {
     private Course mCourse;
     private String mTitle;
     private String mText;
@@ -76,32 +76,6 @@ public final class Note implements Parcelable {
     public String toString() {
         return getCompareKey();
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(mCourse, 0);
-        dest.writeString(mTitle);
-        dest.writeString(mText);
-    }
-
-    public final static Parcelable.Creator<Note> CREATOR =
-            new Parcelable.Creator<Note>() {
-
-                @Override
-                public Note createFromParcel(Parcel source) {
-                    return new Note(source);
-                }
-
-                @Override
-                public Note[] newArray(int size) {
-                    return new Note[size];
-                }
-            };
 
     public int getmId() {
         return mId;
