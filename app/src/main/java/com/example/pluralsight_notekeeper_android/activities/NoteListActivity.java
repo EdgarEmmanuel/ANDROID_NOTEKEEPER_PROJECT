@@ -21,7 +21,6 @@ import java.util.List;
 
 public class NoteListActivity extends AppCompatActivity {
 
-    public static final String NOTE="com.example.pluralsight_notekeeper_android.activities.NOTE";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +52,7 @@ public class NoteListActivity extends AppCompatActivity {
 
                 Note clickedItemNoteInformation = (Note) list_note.getItemAtPosition(position);
 
-                goToOneItemDetails.putExtra(NoteListActivity.NOTE,clickedItemNoteInformation);
+                goToOneItemDetails.putExtra(NoteActivity.NOTE,clickedItemNoteInformation);
                 startActivity(goToOneItemDetails);
             }
         });

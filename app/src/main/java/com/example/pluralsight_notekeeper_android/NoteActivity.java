@@ -2,20 +2,26 @@ package com.example.pluralsight_notekeeper_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.pluralsight_notekeeper_android.activities.NoteListActivity;
 import com.example.pluralsight_notekeeper_android.database.dao.DataManager;
 import com.example.pluralsight_notekeeper_android.database.models.Course;
+import com.example.pluralsight_notekeeper_android.database.models.Module;
+import com.example.pluralsight_notekeeper_android.database.models.Note;
 
 import java.util.List;
 
 public class NoteActivity extends AppCompatActivity {
+    public static final String NOTE="com.example.pluralsight_notekeeper_android.activities.NOTE";
 
     Spinner spinner_courses;
     EditText text_note_title,text_note_text;
+    private Note messageNoteInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +41,35 @@ public class NoteActivity extends AppCompatActivity {
 
         spinner_courses.setAdapter(coursesAdapter);
 
+        getExtraData();
+
+        displayExtraData(spinner_courses,text_note_title,text_note_text);
+
+    }
+
+    private void displayExtraData(Spinner spinner_courses,
+                                  EditText text_note_title, EditText text_note_text) {
+
+        List<Course> courses = DataManager.getInstance().getCourses();
+        int courseIndex = courses.indexOf(messageNoteInformation.getCourse());
+
+        spinner_courses.setSelection(courseIndex);
+
+        text_note_title.setText(messageNoteInformation.getTitle());
+        text_note_text.setText(messageNoteInformation.getText());
+
+
+    }
+
+    /**
+     * this funtion reads extra data coming from other Activtiy
+     */
+    private void getExtraData() {
+        Intent messageObject = getIntent();
+
+        if(messageObject!=null){
+            messageNoteInformation = messageObject
+                    .getParcelableExtra(NOTE);
+        }
     }
 }
