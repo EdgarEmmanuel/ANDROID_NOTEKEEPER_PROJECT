@@ -21,19 +21,18 @@ import java.util.List;
 
 public class NoteListActivity extends AppCompatActivity {
 
-    ListView list_note;
+    public static final String NOTE="com.example.pluralsight_notekeeper_android.activities.NOTE";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_note_list);
 
-        list_note = findViewById(R.id.list_note);
-
         initializeListContentAndHandleClick();
     }
 
     private void initializeListContentAndHandleClick() {
+        final ListView list_note = findViewById(R.id.list_note);
         List<Note> notes = DataManager.getInstance().getNotes();
 
         ArrayAdapter<Note> notesAdapter =
@@ -45,15 +44,16 @@ public class NoteListActivity extends AppCompatActivity {
 
         //handle an item click
 
-       //list_note.
-
-        list_note.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       list_note.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position,
                                     long l) {
                 Intent goToOneItemDetails = new Intent(NoteListActivity.this,
                         NoteActivity.class);
 
+                Note clickedItemNoteInformation = (Note) list_note.getItemAtPosition(position);
+
+                goToOneItemDetails.putExtra(NoteListActivity.NOTE,clickedItemNoteInformation);
                 startActivity(goToOneItemDetails);
             }
         });
