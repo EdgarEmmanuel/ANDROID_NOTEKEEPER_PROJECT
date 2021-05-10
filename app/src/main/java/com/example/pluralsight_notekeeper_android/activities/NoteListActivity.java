@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,16 +17,28 @@ import com.example.pluralsight_notekeeper_android.R;
 import com.example.pluralsight_notekeeper_android.database.dao.DataManager;
 import com.example.pluralsight_notekeeper_android.database.models.Course;
 import com.example.pluralsight_notekeeper_android.database.models.Note;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
 public class NoteListActivity extends AppCompatActivity {
 
+    FloatingActionButton floating_action_button;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_note_list);
+
+        floating_action_button = findViewById(R.id.floating_action_button);
+
+        floating_action_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(NoteListActivity.this
+                        ,"CLICKED BUTTON",Toast.LENGTH_LONG).show();
+            }
+        });
 
         initializeListContentAndHandleClick();
     }
