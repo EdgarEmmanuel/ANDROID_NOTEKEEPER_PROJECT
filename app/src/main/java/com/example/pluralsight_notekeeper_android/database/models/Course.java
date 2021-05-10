@@ -6,22 +6,22 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class CourseInfo implements Parcelable{
+public final class Course implements Parcelable{
     private final String mCourseId;
     private final String mTitle;
-    private final List<ModuleInfo> mModules;
+    private final List<Module> mModules;
 
-    public CourseInfo(String courseId, String title, List<ModuleInfo> modules) {
+    public Course(String courseId, String title, List<Module> modules) {
         mCourseId = courseId;
         mTitle = title;
         mModules = modules;
     }
 
-    private CourseInfo(Parcel source) {
+    private Course(Parcel source) {
         mCourseId = source.readString();
         mTitle = source.readString();
         mModules = new ArrayList<>();
-        source.readTypedList(mModules, ModuleInfo.CREATOR);
+        source.readTypedList(mModules, Module.CREATOR);
     }
 
     public String getCourseId() {
@@ -32,7 +32,7 @@ public final class CourseInfo implements Parcelable{
         return mTitle;
     }
 
-    public List<ModuleInfo> getModules() {
+    public List<Module> getModules() {
         return mModules;
     }
 
@@ -50,10 +50,10 @@ public final class CourseInfo implements Parcelable{
             mModules.get(i).setComplete(status[i]);
     }
 
-    public ModuleInfo getModule(String moduleId) {
-        for(ModuleInfo moduleInfo: mModules) {
-            if(moduleId.equals(moduleInfo.getModuleId()))
-                return moduleInfo;
+    public Module getModule(String moduleId) {
+        for(Module module : mModules) {
+            if(moduleId.equals(module.getModuleId()))
+                return module;
         }
         return null;
     }
@@ -68,7 +68,7 @@ public final class CourseInfo implements Parcelable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CourseInfo that = (CourseInfo) o;
+        Course that = (Course) o;
 
         return mCourseId.equals(that.mCourseId);
 
@@ -90,17 +90,17 @@ public final class CourseInfo implements Parcelable{
         dest.writeTypedList(mModules);
     }
 
-    public static final Parcelable.Creator<CourseInfo> CREATOR =
-            new Parcelable.Creator<CourseInfo>() {
+    public static final Parcelable.Creator<Course> CREATOR =
+            new Parcelable.Creator<Course>() {
 
                 @Override
-                public CourseInfo createFromParcel(Parcel source) {
-                    return new CourseInfo(source);
+                public Course createFromParcel(Parcel source) {
+                    return new Course(source);
                 }
 
                 @Override
-                public CourseInfo[] newArray(int size) {
-                    return new CourseInfo[size];
+                public Course[] newArray(int size) {
+                    return new Course[size];
                 }
             };
 

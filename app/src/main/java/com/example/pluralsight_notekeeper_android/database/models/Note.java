@@ -3,25 +3,25 @@ package com.example.pluralsight_notekeeper_android.database.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public final class NoteInfo implements Parcelable {
-    private CourseInfo mCourse;
+public final class Note implements Parcelable {
+    private Course mCourse;
     private String mTitle;
     private String mText;
     private int mId;
 
-    public NoteInfo(CourseInfo course, String title, String text) {
+    public Note(Course course, String title, String text) {
         mCourse = course;
         mTitle = title;
         mText = text;
     }
 
-    private NoteInfo(Parcel source) {
-        mCourse = source.readParcelable(CourseInfo.class.getClassLoader());
+    private Note(Parcel source) {
+        mCourse = source.readParcelable(Course.class.getClassLoader());
         mTitle = source.readString();
         mText = source.readString();
     }
 
-    public NoteInfo(int id, CourseInfo noteCourse, String noteTitle, String noteText) {
+    public Note(int id, Course noteCourse, String noteTitle, String noteText) {
         mId = id;
         mCourse = noteCourse;
         mTitle = noteTitle;
@@ -29,11 +29,11 @@ public final class NoteInfo implements Parcelable {
 
     }
 
-    public CourseInfo getCourse() {
+    public Course getCourse() {
         return mCourse;
     }
 
-    public void setCourse(CourseInfo course) {
+    public void setCourse(Course course) {
         mCourse = course;
     }
 
@@ -62,7 +62,7 @@ public final class NoteInfo implements Parcelable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        NoteInfo that = (NoteInfo) o;
+        Note that = (Note) o;
 
         return getCompareKey().equals(that.getCompareKey());
     }
@@ -89,17 +89,17 @@ public final class NoteInfo implements Parcelable {
         dest.writeString(mText);
     }
 
-    public final static Parcelable.Creator<NoteInfo> CREATOR =
-            new Parcelable.Creator<NoteInfo>() {
+    public final static Parcelable.Creator<Note> CREATOR =
+            new Parcelable.Creator<Note>() {
 
                 @Override
-                public NoteInfo createFromParcel(Parcel source) {
-                    return new NoteInfo(source);
+                public Note createFromParcel(Parcel source) {
+                    return new Note(source);
                 }
 
                 @Override
-                public NoteInfo[] newArray(int size) {
-                    return new NoteInfo[size];
+                public Note[] newArray(int size) {
+                    return new Note[size];
                 }
             };
 

@@ -1,6 +1,6 @@
 package com.example.pluralsight_notekeeper_android.database.utilities;
 
-public class NoteInfoEntry {
+public class NoteTableUtilities {
 
     public static String COLUMN_NOTE_TITLE="";
     public static String COLUMN_NOTE_TEXT="";

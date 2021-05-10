@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.pluralsight_notekeeper_android.database.dao.DataManager;
-import com.example.pluralsight_notekeeper_android.database.models.CourseInfo;
+import com.example.pluralsight_notekeeper_android.database.models.Course;
 
 import java.util.List;
 
@@ -26,9 +26,9 @@ public class NoteActivity extends AppCompatActivity {
         text_note_title = findViewById(R.id.text_note_title);
         text_note_text = findViewById(R.id.text_note_text);
 
-        List<CourseInfo> coursesList = DataManager.getInstance().getCourses();
+        List<Course> coursesList = DataManager.getInstance().getCourses();
 
-        ArrayAdapter<CourseInfo> coursesAdapter =
+        ArrayAdapter<Course> coursesAdapter =
            new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,coursesList);
 
         coursesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -3,22 +3,22 @@ package com.example.pluralsight_notekeeper_android.database.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public final class ModuleInfo implements Parcelable {
+public final class Module implements Parcelable {
     private final String mModuleId;
     private final String mTitle;
     private boolean mIsComplete = false;
 
-    public ModuleInfo(String moduleId, String title) {
+    public Module(String moduleId, String title) {
         this(moduleId, title, false);
     }
 
-    public ModuleInfo(String moduleId, String title, boolean isComplete) {
+    public Module(String moduleId, String title, boolean isComplete) {
         mModuleId = moduleId;
         mTitle = title;
         mIsComplete = isComplete;
     }
 
-    private ModuleInfo(Parcel source) {
+    private Module(Parcel source) {
         mModuleId = source.readString();
         mTitle = source.readString();
         mIsComplete = source.readByte() == 1;
@@ -50,7 +50,7 @@ public final class ModuleInfo implements Parcelable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ModuleInfo that = (ModuleInfo) o;
+        Module that = (Module) o;
 
         return mModuleId.equals(that.mModuleId);
     }
@@ -72,17 +72,17 @@ public final class ModuleInfo implements Parcelable {
         dest.writeByte((byte)(mIsComplete ? 1 : 0));
     }
 
-    public static final Parcelable.Creator<ModuleInfo> CREATOR =
-            new Parcelable.Creator<ModuleInfo>() {
+    public static final Parcelable.Creator<Module> CREATOR =
+            new Parcelable.Creator<Module>() {
 
                 @Override
-                public ModuleInfo createFromParcel(Parcel source) {
-                    return new ModuleInfo(source);
+                public Module createFromParcel(Parcel source) {
+                    return new Module(source);
                 }
 
                 @Override
-                public ModuleInfo[] newArray(int size) {
-                    return new ModuleInfo[size];
+                public Module[] newArray(int size) {
+                    return new Module[size];
                 }
             };
 
