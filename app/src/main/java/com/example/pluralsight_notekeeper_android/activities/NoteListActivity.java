@@ -35,8 +35,7 @@ public class NoteListActivity extends AppCompatActivity {
         floating_action_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(NoteListActivity.this
-                        ,"CLICKED BUTTON",Toast.LENGTH_LONG).show();
+               startActivity(new Intent(NoteListActivity.this,NoteActivity.class));
             }
         });
 

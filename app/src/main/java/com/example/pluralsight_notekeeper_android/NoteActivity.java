@@ -20,6 +20,7 @@ public class NoteActivity extends AppCompatActivity {
     Spinner spinner_courses_view;
     EditText textView_note_title, textView_note_text;
     private Note messageNoteInformation;
+    private Boolean hasExtraMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,9 @@ public class NoteActivity extends AppCompatActivity {
         spinner_courses_view.setAdapter(coursesAdapter);
 
         getExtraData();
-        displayExtraData(spinner_courses_view, textView_note_title, textView_note_text);
+
+        if(!hasExtraMessage)
+            displayExtraData(spinner_courses_view, textView_note_title, textView_note_text);
     }
 
     private void displayExtraData(Spinner spinner_courses,
@@ -62,10 +65,9 @@ public class NoteActivity extends AppCompatActivity {
      */
     private void getExtraData() {
         Intent messageObject = getIntent();
+        messageNoteInformation = messageObject
+                .getParcelableExtra(NOTE);
 
-        if(messageObject!=null){
-            messageNoteInformation = messageObject
-                    .getParcelableExtra(NOTE);
-        }
+        hasExtraMessage = messageNoteInformation == null;
     }
 }
