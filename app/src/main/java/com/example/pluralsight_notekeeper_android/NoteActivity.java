@@ -8,10 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.pluralsight_notekeeper_android.activities.NoteListActivity;
 import com.example.pluralsight_notekeeper_android.database.dao.DataManager;
 import com.example.pluralsight_notekeeper_android.database.models.Course;
-import com.example.pluralsight_notekeeper_android.database.models.Module;
 import com.example.pluralsight_notekeeper_android.database.models.Note;
 
 import java.util.List;
@@ -19,8 +17,8 @@ import java.util.List;
 public class NoteActivity extends AppCompatActivity {
     public static final String NOTE="com.example.pluralsight_notekeeper_android.activities.NOTE";
 
-    Spinner spinner_courses;
-    EditText text_note_title,text_note_text;
+    Spinner spinner_courses_view;
+    EditText textView_note_title, textView_note_text;
     private Note messageNoteInformation;
 
     @Override
@@ -28,9 +26,9 @@ public class NoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
-        spinner_courses = findViewById(R.id.spinner_courses);
-        text_note_title = findViewById(R.id.text_note_title);
-        text_note_text = findViewById(R.id.text_note_text);
+        spinner_courses_view = findViewById(R.id.spinner_courses);
+        textView_note_title = findViewById(R.id.text_note_title);
+        textView_note_text = findViewById(R.id.text_note_text);
 
         List<Course> coursesList = DataManager.getInstance().getCourses();
 
@@ -39,12 +37,10 @@ public class NoteActivity extends AppCompatActivity {
 
         coursesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinner_courses.setAdapter(coursesAdapter);
+        spinner_courses_view.setAdapter(coursesAdapter);
 
         getExtraData();
-
-        displayExtraData(spinner_courses,text_note_title,text_note_text);
-
+        displayExtraData(spinner_courses_view, textView_note_title, textView_note_text);
     }
 
     private void displayExtraData(Spinner spinner_courses,
@@ -62,7 +58,7 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     /**
-     * this funtion reads extra data coming from other Activtiy
+     * this function reads extra data coming from other Activtiy
      */
     private void getExtraData() {
         Intent messageObject = getIntent();
