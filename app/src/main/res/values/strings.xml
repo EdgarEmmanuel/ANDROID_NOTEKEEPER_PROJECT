@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">NOTE KEEPER</string>
+    <string name="page_edit_note">EDIT NOTE</string>
     <string name="action_settings">Settings</string>
 </resources>
