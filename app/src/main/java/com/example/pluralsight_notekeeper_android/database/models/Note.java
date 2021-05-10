@@ -3,7 +3,7 @@ package com.example.pluralsight_notekeeper_android.database.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public final class Note {
+public final class Note implements Parcelable{
     private Course mCourse;
     private String mTitle;
     private String mText;
@@ -84,4 +84,32 @@ public final class Note {
     public void setmId(int mId) {
         this.mId = mId;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeParcelable(mCourse, i);
+        parcel.writeString(mTitle);
+        parcel.writeString(mText);
+        parcel.writeInt(mId);
+    }
+
+    public static final Creator<Note> CREATOR = new Creator<Note>() {
+        @Override
+        public Note createFromParcel(Parcel in) {
+            return new Note(in);
+        }
+
+        @Override
+        public Note[] newArray(int size) {
+            return new Note[size];
+        }
+    };
+
+
+
 }
