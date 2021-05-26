@@ -63,6 +63,7 @@ public class NoteActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.action_send_email){
+            sendMail();
             return true;
         }
 
@@ -70,6 +71,19 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     public void sendMail(){
+       String courseName = spinner_courses_view.getSelectedItem().toString();
+       String note_title_value = textView_note_title.getText().toString().trim();
+       String note_text_value = textView_note_text.getText().toString().trim();
+       String finalContent ="Course : "+ courseName
+               +"\n\n"+" title : "+note_title_value+"\n\n"+ " Content : \n "+note_text_value;
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_SUBJECT, courseName);
+        intent.putExtra(Intent.EXTRA_TEXT, finalContent);
+        intent.setType("message/rf2822");
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
 
     }
 
