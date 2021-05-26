@@ -6,22 +6,6 @@
     android:id="@+id/layout_note_list"
     android:layout_height="match_parent">
 
-<!--    <com.google.android.material.appbar.AppBarLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:theme="@style/Theme.Pluralsight_notekeeper_android">-->
-
-<!--       -->
-
-<!--    </com.google.android.material.appbar.AppBarLayout>-->
-    <androidx.appcompat.widget.Toolbar
-    android:id="@+id/toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    app:popupTheme="@style/Theme.Pluralsight_notekeeper_android" />
-
-
-
     <ListView
         android:id="@+id/list_note"
         android:layout_width="wrap_content"
