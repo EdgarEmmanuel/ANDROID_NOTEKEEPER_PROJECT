@@ -1,9 +1,12 @@
 package com.example.pluralsight_notekeeper_android;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -20,6 +23,7 @@ public class NoteActivity extends AppCompatActivity {
 
     Spinner spinner_courses_view;
     EditText textView_note_title, textView_note_text;
+
     private Note messageNoteInformation;
     private int notePosition;
 
@@ -84,5 +88,24 @@ public class NoteActivity extends AppCompatActivity {
                 .getIntExtra(NOTE_POSITION, DEFAULT_POSITION);
 
         return (notePosition == DEFAULT_POSITION);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_note, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.action_send_email){
+            System.out.println(" the email biutton ");
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
