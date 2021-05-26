@@ -2,10 +2,12 @@ package com.example.pluralsight_notekeeper_android;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -32,6 +34,7 @@ public class NoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
+
         spinner_courses_view = findViewById(R.id.spinner_courses);
         textView_note_title = findViewById(R.id.text_note_title);
         textView_note_text = findViewById(R.id.text_note_text);
@@ -48,6 +51,26 @@ public class NoteActivity extends AppCompatActivity {
         if(!hasExtraData())
             displayExtraDataByNotePosition(spinner_courses_view, textView_note_title,
                     textView_note_text,notePosition);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_note, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.action_send_email){
+            System.out.println(" the email biutton ");
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void displayExtraDataByNoteInformation(Spinner spinner_courses,
@@ -90,22 +113,5 @@ public class NoteActivity extends AppCompatActivity {
         return (notePosition == DEFAULT_POSITION);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_note, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if(id == R.id.action_send_email){
-            System.out.println(" the email biutton ");
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
