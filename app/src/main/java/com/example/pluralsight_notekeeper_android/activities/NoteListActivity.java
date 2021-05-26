@@ -64,13 +64,13 @@ public class NoteListActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent goToOneItemDetails = new Intent(NoteListActivity.this,
+                Intent goToNoteActivity = new Intent(NoteListActivity.this,
                         NoteActivity.class);
 
-                Note clickedItemNoteInformation = (Note) list.getItemAtPosition(position);
+               // Note clickedItemNoteInformation = (Note) list.getItemAtPosition(position);
 
-                goToOneItemDetails.putExtra(NoteActivity.NOTE_POSITION,clickedItemNoteInformation);
-                startActivity(goToOneItemDetails);
+                goToNoteActivity.putExtra(NoteActivity.NOTE_POSITION,position);
+                startActivity(goToNoteActivity);
             }
         });
     }

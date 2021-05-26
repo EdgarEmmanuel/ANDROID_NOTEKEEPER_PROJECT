@@ -16,10 +16,12 @@ import java.util.List;
 
 public class NoteActivity extends AppCompatActivity {
     public static final String NOTE_POSITION="com.example.pluralsight_notekeeper_android.activities.NOTE_POSITION";
+    public static final int DEFAULT_POSITION = -1;
 
     Spinner spinner_courses_view;
     EditText textView_note_title, textView_note_text;
     private Note messageNoteInformation;
+    private int notePosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +42,13 @@ public class NoteActivity extends AppCompatActivity {
         spinner_courses_view.setAdapter(coursesAdapter);
 
         if(!hasExtraData())
-            displayExtraData(spinner_courses_view, textView_note_title, textView_note_text);
+            displayExtraDataByNotePosition(spinner_courses_view, textView_note_title,
+                    textView_note_text,notePosition);
     }
 
-    private void displayExtraData(Spinner spinner_courses,
-                                  EditText text_note_title, EditText text_note_text) {
+    private void displayExtraDataByNoteInformation(Spinner spinner_courses,
+                                  EditText text_note_title,
+                                  EditText text_note_text) {
 
         List<Course> courses = DataManager.getInstance().getCourses();
         int courseIndex = courses.indexOf(messageNoteInformation.getCourse());
@@ -57,14 +61,28 @@ public class NoteActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * this function reads extra data coming from other Activtiy
-     */
+    private void displayExtraDataByNotePosition(Spinner spinner_courses,
+                                                   EditText text_note_title,
+                                                   EditText text_note_text, int notePosition) {
+
+        List<Course> courses = DataManager.getInstance().getCourses();
+        Note note = DataManager.getInstance().getNotes().get(notePosition);
+        int courseIndex = courses.indexOf(note.getCourse());
+
+        spinner_courses.setSelection(courseIndex);
+
+        text_note_title.setText(note.getTitle());
+        text_note_text.setText(note.getText());
+
+
+    }
+
+
     private Boolean hasExtraData() {
         Intent messageObject = getIntent();
-        messageNoteInformation = messageObject
-                .getParcelableExtra(NOTE_POSITION);
+        notePosition = messageObject
+                .getIntExtra(NOTE_POSITION, DEFAULT_POSITION);
 
-        return (messageNoteInformation == null);
+        return (notePosition == DEFAULT_POSITION);
     }
 }
