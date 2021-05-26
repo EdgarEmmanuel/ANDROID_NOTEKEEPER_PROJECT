@@ -69,7 +69,7 @@ public class NoteListActivity extends AppCompatActivity {
 
                 Note clickedItemNoteInformation = (Note) list.getItemAtPosition(position);
 
-                goToOneItemDetails.putExtra(NoteActivity.NOTE,clickedItemNoteInformation);
+                goToOneItemDetails.putExtra(NoteActivity.NOTE_POSITION,clickedItemNoteInformation);
                 startActivity(goToOneItemDetails);
             }
         });

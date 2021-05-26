@@ -15,12 +15,11 @@ import com.example.pluralsight_notekeeper_android.database.models.Note;
 import java.util.List;
 
 public class NoteActivity extends AppCompatActivity {
-    public static final String NOTE="com.example.pluralsight_notekeeper_android.activities.NOTE";
+    public static final String NOTE_POSITION="com.example.pluralsight_notekeeper_android.activities.NOTE_POSITION";
 
     Spinner spinner_courses_view;
     EditText textView_note_title, textView_note_text;
     private Note messageNoteInformation;
-    private Boolean hasExtraMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +39,7 @@ public class NoteActivity extends AppCompatActivity {
 
         spinner_courses_view.setAdapter(coursesAdapter);
 
-        getExtraData();
-
-        if(!hasExtraMessage)
+        if(!hasExtraData())
             displayExtraData(spinner_courses_view, textView_note_title, textView_note_text);
     }
 
@@ -63,11 +60,11 @@ public class NoteActivity extends AppCompatActivity {
     /**
      * this function reads extra data coming from other Activtiy
      */
-    private void getExtraData() {
+    private Boolean hasExtraData() {
         Intent messageObject = getIntent();
         messageNoteInformation = messageObject
-                .getParcelableExtra(NOTE);
+                .getParcelableExtra(NOTE_POSITION);
 
-        hasExtraMessage = messageNoteInformation == null;
+        return (messageNoteInformation == null);
     }
 }
