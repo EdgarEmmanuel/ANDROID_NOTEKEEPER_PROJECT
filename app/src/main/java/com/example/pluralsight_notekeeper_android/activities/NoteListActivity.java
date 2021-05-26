@@ -43,6 +43,12 @@ public class NoteListActivity extends AppCompatActivity {
     }
 
     private void initializeListContentAndHandleClick() {
+        ListView list_note = initializeListContent();
+
+        HandleOneItemClickEvent(list_note);
+    }
+
+    public ListView initializeListContent(){
         final ListView list_note = findViewById(R.id.list_note);
         List<Note> notes = DataManager.getInstance().getNotes();
 
@@ -51,7 +57,7 @@ public class NoteListActivity extends AppCompatActivity {
 
         list_note.setAdapter(notesAdapter);
 
-        HandleOneItemClickEvent(list_note);
+        return list_note;
     }
 
     public void HandleOneItemClickEvent(ListView list){
