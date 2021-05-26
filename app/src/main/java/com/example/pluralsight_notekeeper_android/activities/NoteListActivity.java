@@ -3,6 +3,9 @@ package com.example.pluralsight_notekeeper_android.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -40,6 +43,26 @@ public class NoteListActivity extends AppCompatActivity {
         });
 
         initializeListContentAndHandleClick();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_note, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.action_send_email){
+            System.out.println(" the email biutton ");
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void initializeListContentAndHandleClick() {
