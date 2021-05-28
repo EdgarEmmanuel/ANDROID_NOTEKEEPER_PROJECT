@@ -25,6 +25,7 @@ public class NoteActivity extends AppCompatActivity {
 
     private Note messageNoteInformation;
     private int notePosition;
+    private int createdNotePosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,19 @@ public class NoteActivity extends AppCompatActivity {
         if(!hasExtraData())
             displayExtraDataByNotePosition(spinner_courses_view, textView_note_title,
                     textView_note_text,notePosition);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveNote();
+        
+    }
+
+    private void saveNote() {
+        messageNoteInformation.setCourse((Course) spinner_courses_view.getSelectedItem());
+        messageNoteInformation.setText(textView_note_text.getText().toString().trim());
+        messageNoteInformation.setTitle(textView_note_title.getText().toString().trim());
     }
 
     @Override
@@ -124,7 +138,20 @@ public class NoteActivity extends AppCompatActivity {
         notePosition = messageObject
                 .getIntExtra(NOTE_POSITION, DEFAULT_POSITION);
 
-        return (notePosition == DEFAULT_POSITION);
+        Boolean hasNewNote =  (notePosition == DEFAULT_POSITION);
+        if(hasNewNote){
+            createNewNote();
+            return true;
+        }else{
+            messageNoteInformation = DataManager.getInstance().getNotes().get(notePosition);
+            return false;
+        }
+    }
+
+    private void createNewNote() {
+        DataManager dataManager = DataManager.getInstance();
+        createdNotePosition = dataManager.createNewNote();
+        messageNoteInformation = DataManager.getInstance().getNotes().get(createdNotePosition);
     }
 
 
