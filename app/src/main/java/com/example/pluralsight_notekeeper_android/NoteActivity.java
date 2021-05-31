@@ -26,6 +26,8 @@ public class NoteActivity extends AppCompatActivity {
     private Note messageNoteInformation;
     private int notePosition;
     private int createdNotePosition;
+    private ArrayAdapter<Course> coursesAdapter;
+    private List<Course> coursesList;
     Boolean isCancelling = false;
     private Boolean hasNewNote;
 
@@ -34,44 +36,67 @@ public class NoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
+        initializeViewWidgets();
 
+        FillTheSpinnerViewWidget();
+
+        displayDataIfExtraData();
+    }
+
+    public void initializeViewWidgets(){
         spinner_courses_view = findViewById(R.id.spinner_courses);
         textView_note_title = findViewById(R.id.text_note_title);
         textView_note_text = findViewById(R.id.text_note_text);
+    }
 
-        List<Course> coursesList = DataManager.getInstance().getCourses();
 
-        ArrayAdapter<Course> coursesAdapter =
-           new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,coursesList);
+    public void FillTheSpinnerViewWidget(){
+
+        coursesList = DataManager.getInstance().getCourses();
+
+        coursesAdapter =
+                new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,coursesList);
 
         coursesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner_courses_view.setAdapter(coursesAdapter);
 
+    }
+
+
+    public void displayDataIfExtraData(){
         if(!hasExtraData())
             displayExtraDataByNotePosition(spinner_courses_view, textView_note_title,
                     textView_note_text,notePosition);
     }
 
+
     @Override
     protected void onPause() {
         super.onPause();
+        saveOrNotSaveNoteByActionOnCancelButton();
+    }
+
+    public void saveOrNotSaveNoteByActionOnCancelButton(){
         if(isCancelling){
             if(hasNewNote){
                 DataManager.getInstance().removeNote(notePosition);
             }
-
         }else {
             saveNote();
         }
-
-        
     }
+
 
     private void saveNote() {
         messageNoteInformation.setCourse((Course) spinner_courses_view.getSelectedItem());
         messageNoteInformation.setText(textView_note_text.getText().toString().trim());
         messageNoteInformation.setTitle(textView_note_title.getText().toString().trim());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
