@@ -82,14 +82,16 @@ public class NoteActivity extends AppCompatActivity {
             if(hasNewNote){
                 DataManager.getInstance().removeNote(notePosition);
             }
-        }else {
+        } else {
             saveNote();
         }
     }
 
 
     private void saveNote() {
-        messageNoteInformation.setCourse((Course) spinner_courses_view.getSelectedItem());
+        //Course c = (Course)DataManager.getInstance().getCourseByName(spinner_courses_view.getSelectedItem().toString());
+        int positFinalOnReturn = spinner_courses_view.getSelectedItemPosition();
+        messageNoteInformation.setCourse(DataManager.getInstance().getCourses().get(positFinalOnReturn));
         messageNoteInformation.setText(textView_note_text.getText().toString().trim());
         messageNoteInformation.setTitle(textView_note_title.getText().toString().trim());
     }
@@ -97,6 +99,7 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        coursesAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -189,7 +192,8 @@ public class NoteActivity extends AppCompatActivity {
     private void createNewNote() {
         DataManager dataManager = DataManager.getInstance();
         createdNotePosition = dataManager.createNewNote();
-        messageNoteInformation = DataManager.getInstance().getNotes().get(createdNotePosition);
+        messageNoteInformation =
+                DataManager.getInstance().getNotes().get(createdNotePosition);
     }
 
 

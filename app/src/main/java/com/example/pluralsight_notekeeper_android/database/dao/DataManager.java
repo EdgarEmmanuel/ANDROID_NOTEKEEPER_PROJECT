@@ -138,6 +138,14 @@ public class DataManager {
         return null;
     }
 
+    public Course getCourseByName(String name){
+        for (Course course : mCourses) {
+            if (name.equalsIgnoreCase(course.getTitle()))
+                return course;
+        }
+        return null;
+    }
+
     public List<Note> getNotes(Course course) {
         ArrayList<Note> notes = new ArrayList<>();
         for(Note note:mNotes) {
