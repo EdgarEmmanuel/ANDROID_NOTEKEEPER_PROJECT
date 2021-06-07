@@ -30,6 +30,9 @@ public class NoteActivity extends AppCompatActivity {
     private List<Course> coursesList;
     Boolean isCancelling = false;
     private Boolean hasNewNote;
+    private String OriginalmessageNoteInformationCourseId;
+    private String OriginalmessageNoteInformationTitle;
+    private String OriginalmessageNoteInformationText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,16 @@ public class NoteActivity extends AppCompatActivity {
         FillTheSpinnerViewWidget();
 
         displayDataIfExtraData();
+
+        saveOriginalNoteValues();
+    }
+
+    private void saveOriginalNoteValues() {
+        if(hasNewNote)
+            return ;
+        OriginalmessageNoteInformationCourseId = messageNoteInformation.getCourse().getCourseId();
+        OriginalmessageNoteInformationTitle = messageNoteInformation.getTitle();
+        OriginalmessageNoteInformationText = messageNoteInformation.getText();
     }
 
     public void initializeViewWidgets(){
@@ -81,10 +94,19 @@ public class NoteActivity extends AppCompatActivity {
         if(isCancelling){
             if(hasNewNote){
                 DataManager.getInstance().removeNote(notePosition);
+            } else {
+                storePreviousNoteValues();
             }
         } else {
             saveNote();
         }
+    }
+
+    private void storePreviousNoteValues() {
+        Course course = DataManager.getInstance().getCourse(OriginalmessageNoteInformationCourseId);
+        messageNoteInformation.setCourse(course);
+        messageNoteInformation.setTitle(OriginalmessageNoteInformationTitle);
+        messageNoteInformation.setText(OriginalmessageNoteInformationText);
     }
 
 

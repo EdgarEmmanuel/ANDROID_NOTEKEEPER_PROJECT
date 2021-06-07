@@ -90,7 +90,7 @@ public class NoteListActivity extends AppCompatActivity {
         notesAdapter.notifyDataSetChanged();
     }
 
-    
+
 
 
 
