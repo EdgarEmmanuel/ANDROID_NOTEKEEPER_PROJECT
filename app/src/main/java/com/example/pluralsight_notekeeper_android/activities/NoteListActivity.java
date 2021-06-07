@@ -34,16 +34,20 @@ public class NoteListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_note_list);
 
+        initializeWidgetView();
+
+        initializeListContentAndHandleClick();
+    }
+
+    public void initializeWidgetView(){
         floating_action_button = findViewById(R.id.floating_action_button);
 
         floating_action_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               startActivity(new Intent(NoteListActivity.this,NoteActivity.class));
+                startActivity(new Intent(NoteListActivity.this,NoteActivity.class));
             }
         });
-
-        initializeListContentAndHandleClick();
     }
 
 
@@ -85,4 +89,16 @@ public class NoteListActivity extends AppCompatActivity {
         super.onResume();
         notesAdapter.notifyDataSetChanged();
     }
+
+    
+
+
+
+
+
+
+
+
+
+
 }
