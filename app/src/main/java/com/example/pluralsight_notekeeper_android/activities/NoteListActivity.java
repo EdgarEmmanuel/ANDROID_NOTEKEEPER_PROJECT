@@ -27,6 +27,7 @@ import java.util.List;
 public class NoteListActivity extends AppCompatActivity {
 
     FloatingActionButton floating_action_button;
+    private ArrayAdapter<Note> notesAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,8 +58,7 @@ public class NoteListActivity extends AppCompatActivity {
         final ListView list_note = findViewById(R.id.list_note);
         List<Note> notes = DataManager.getInstance().getNotes();
 
-        ArrayAdapter<Note> notesAdapter =
-                new ArrayAdapter(this, android.R.layout.simple_list_item_1, notes);
+        notesAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, notes);
 
         list_note.setAdapter(notesAdapter);
 
@@ -80,5 +80,9 @@ public class NoteListActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        notesAdapter.notifyDataSetChanged();
+    }
 }
