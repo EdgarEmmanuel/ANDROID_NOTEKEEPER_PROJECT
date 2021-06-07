@@ -89,9 +89,7 @@ public class NoteActivity extends AppCompatActivity {
 
 
     private void saveNote() {
-        //Course c = (Course)DataManager.getInstance().getCourseByName(spinner_courses_view.getSelectedItem().toString());
-        int positFinalOnReturn = spinner_courses_view.getSelectedItemPosition();
-        messageNoteInformation.setCourse(DataManager.getInstance().getCourses().get(positFinalOnReturn));
+        messageNoteInformation.setCourse((Course)spinner_courses_view.getSelectedItem());
         messageNoteInformation.setText(textView_note_text.getText().toString().trim());
         messageNoteInformation.setTitle(textView_note_title.getText().toString().trim());
     }
